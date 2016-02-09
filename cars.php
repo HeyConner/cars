@@ -1,9 +1,23 @@
 <?php
-    class Car {
-      public $make;
-      public $model;
-      public $price;
-      public $miles;
+    class Car
+    {
+      private $make;
+      private $model;
+      private $price;
+      private $miles;
+
+      $car->model == Ford;
+      $car->setPrice(234);
+
+      function getPrice()
+      {
+        return $this->price;
+      }
+
+      function setPrice($new_price)
+      {
+        $this->price = $new_price;
+      }
 
       function __construct($make_brand, $model_type, $price_car, $mileage_car)
       {
@@ -18,6 +32,14 @@
     $third_car = new Car("Dodge", "Charger", 10000, 33000);
 
     $cars = array($first_car, $second_car, $third_car);
+
+    $cars_matching_search = array();
+    foreach ($cars as $vehicle) {
+      if ($vehicle->price < $_GET["price"]) {
+        array_push($cars_matching_search, $vehicle);
+      }
+    }
+    // var_dump($cars_matching_search);
  ?>
 
 <!DOCTYPE html>
@@ -31,15 +53,15 @@
     <div class="container">
       <h1>Cars!</h1>
       <?php
-        foreach($cars as $vehicle) {
+        foreach($cars_matching_search as $vehicle) {
           echo "<div class='row'>
           <div class='col-md-6'>
           </div>
             <div class='col-md-6'>
               <p>Make: $vehicle->make</p>
               <p>Model: $vehicle->model</p>
-              <p>$$vehicle->price</p>
-              <p>Miles:$vehicle->miles</p>
+              <p>$$vehicle->getPrice()</p>
+              <p>Miles:$vehicle->getMiles()</p>
             </div>
           </div>
           ";
